@@ -28,6 +28,8 @@ function setupPortfolioTabs() {
     const marketingProjects = document.getElementById('marketing-projects');
     const programmingProjects = document.getElementById('programming-projects');
 
+    const creativeProjects = document.getElementById('creative-projects');
+
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             // Remove active class from all tabs
@@ -40,13 +42,22 @@ function setupPortfolioTabs() {
             tab.classList.remove('bg-gray-200', 'text-gray-700', 'dark:bg-gray-700', 'dark:text-gray-300');
             tab.classList.add('bg-primary', 'text-white');
 
-            // Show corresponding projects
-            if (tab.dataset.tab === 'marketing') {
-                marketingProjects.classList.remove('hidden');
-                programmingProjects.classList.add('hidden');
-            } else {
-                marketingProjects.classList.add('hidden');
-                programmingProjects.classList.remove('hidden');
+            // Hide all project sections
+            marketingProjects.classList.add('hidden');
+            programmingProjects.classList.add('hidden');
+            creativeProjects.classList.add('hidden');
+
+            // Show selected project section
+            switch(tab.dataset.tab) {
+                case 'marketing':
+                    marketingProjects.classList.remove('hidden');
+                    break;
+                case 'programming':
+                    programmingProjects.classList.remove('hidden');
+                    break;
+                case 'creative':
+                    creativeProjects.classList.remove('hidden');
+                    break;
             }
         });
     });

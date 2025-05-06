@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Digital Marketer & Programmer</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#3B82F6',
+                        'primary-light': '#60A5FA',
+                        'primary-dark': '#2563EB',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .gradient-blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            filter: blur(100px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .top-right {
+            top: -300px;
+            right: -300px;
+            background: radial-gradient(circle, rgba(59,130,246,0.5) 0%, rgba(59,130,246,0) 70%);
+        }
+
+        .bottom-left {
+            bottom: -300px;
+            left: -300px;
+            background: radial-gradient(circle, rgba(59,130,246,0.5) 0%, rgba(59,130,246,0) 70%);
+        }
+
+        .dark .gradient-blob {
+            opacity: 0.1;
+        }
+
+        .dark .top-right {
+            background: radial-gradient(circle, rgba(96,165,250,0.5) 0%, rgba(96,165,250,0) 70%);
+        }
+
+        .dark .bottom-left {
+            background: radial-gradient(circle, rgba(96,165,250,0.5) 0%, rgba(96,165,250,0) 70%);
+        }
+
+        /* Smooth scroll for Safari */
+        @supports (-webkit-overflow-scrolling: touch) {
+            .scroll-smooth {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    <!-- Gradient decorative elements -->
+    <div class="gradient-blob top-right"></div>
+    <div class="gradient-blob bottom-left"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm z-50 border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-semibold text-gray-900 dark:text-white">Portfolio</a>
+                </div>
+                <div class="hidden sm:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary-light">About</a>
+                    <a href="#portfolio" class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary-light">Portfolio</a>
+                    <a href="#skills" class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary-light">Skills</a>
+                    <a href="#contact" class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary-light">Contact</a>
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+                    </button>
+                </div>
+                <!-- Mobile menu and dark mode buttons -->
+                <div class="sm:hidden flex items-center gap-3">
+                    <button id="mobileMenuBtn" class="inline-flex items-center justify-center p-2.5 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    <button id="darkModeToggleMobile" class="inline-flex items-center justify-center p-2.5 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-moon dark:hidden text-xl"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-400 text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden sm:hidden fixed inset-0 z-[60] bg-gray-900/50 backdrop-blur-sm">
+            <div class="fixed inset-y-0 right-0 w-72 bg-white dark:bg-gray-900 shadow-xl transform transition-transform duration-300">
+                <div class="flex justify-end p-4">
+                    <button id="closeMobileMenu" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="px-4 py-6 space-y-2">
+                    <a href="#about" class="block px-4 py-3 rounded-lg text-gray-600 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-light dark:hover:bg-gray-800 transition-colors">About</a>
+                    <a href="#portfolio" class="block px-4 py-3 rounded-lg text-gray-600 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-light dark:hover:bg-gray-800 transition-colors">Portfolio</a>
+                    <a href="#skills" class="block px-4 py-3 rounded-lg text-gray-600 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-light dark:hover:bg-gray-800 transition-colors">Skills</a>
+                    <a href="#contact" class="block px-4 py-3 rounded-lg text-gray-600 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:text-primary-light dark:hover:bg-gray-800 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+            <div class="text-center mb-16 animate-fade-in">
+                <h1 class="text-5xl sm:text-7xl md:text-8xl font-bold mb-6">
+                    Hi, I'm <span class="text-primary dark:text-primary-light">Kareem</span>
+                </h1>
+                <p class="text-xl sm:text-2xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto">
+                    Imam Abdul Karim Sulaiman
+                </p>
+            </div>
+            <div class="text-center animate-fade-in" style="animation-delay: 0.3s">
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 max-w-3xl mx-auto px-4">
+                    A Digital Marketer & Programmer bridging the gap between marketing creativity and technical excellence
+                </p>
+                <a href="#portfolio" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary-dark dark:bg-primary-light dark:hover:bg-primary transition duration-300">
+                    View My Work
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12 sm:py-20 bg-gray-50 dark:bg-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">About Me</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        I am a passionate and detail-oriented professional with over 4 years of experience in digital marketing and IT systems.
+                    </p>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        Currently, I work as a Programmer and IT Project Manager at Anugrah Sehat Afiat Public Hospital, where I develop and maintain hospital information systems using CodeIgniter 4.
+                    </p>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        My work blends analytical thinking with creative strategy — a synergy I developed during my time in digital marketing with Alta Global School (formerly Menlo Park School), Schoters, and Aposis.
+                    </p>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        I thrive in structured environments and love solving complex problems, whether that's debugging code or crafting campaigns that engage the right audience.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4 sm:gap-6">
+                    <div class="p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg">
+                        <i class="fas fa-chart-line text-4xl text-primary dark:text-primary-light mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Digital Marketing</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Campaign optimization and content strategy specialist</p>
+                    </div>
+                    <div class="p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg">
+                        <i class="fas fa-code text-4xl text-primary dark:text-primary-light mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Programming</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Full-stack development with focus on healthcare systems</p>
+                    </div>
+                    <div class="p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg">
+                        <i class="fas fa-lightbulb text-4xl text-primary dark:text-primary-light mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Creative</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Innovative solutions through creative thinking</p>
+                    </div>
+                    <div class="p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg">
+                        <i class="fas fa-tasks text-4xl text-primary dark:text-primary-light mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Structured</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Organized approach to project management</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-12 sm:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">Portfolio</h2>
+            
+            <!-- Portfolio Tabs -->
+            <div class="flex justify-center mb-6 sm:mb-8">
+                <div class="inline-flex rounded-md shadow-sm" role="group">
+                    <button type="button" class="portfolio-tab active px-6 py-2 text-sm font-medium rounded-l-lg bg-primary text-white" data-tab="marketing">
+                        Digital Marketing
+                    </button>
+                    <button type="button" class="portfolio-tab px-6 py-2 text-sm font-medium rounded-r-lg bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300" data-tab="programming">
+                        Programming
+                    </button>
+                </div>
+            </div>
+
+            <!-- Marketing Projects -->
+            <div id="marketing-projects" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Digital Campaigns - Alta Global School -->
+                <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-gray-200 dark:bg-gray-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-graduation-cap text-4xl text-gray-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 group-hover:text-primary dark:group-hover:text-primary-light transition-colors">Digital Campaigns - Alta Global School</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Developed lead-gen campaigns targeting Indonesian families looking for international curriculum schools.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Meta Ads</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Google Ads</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Analytics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Influencer & Webinar - Schoters -->
+                <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-gray-200 dark:bg-gray-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-users text-4xl text-gray-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 group-hover:text-primary dark:group-hover:text-primary-light transition-colors">Influencer & Webinar - Schoters</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Managed KOL collaborations and monitored webinar performance to boost organic traffic and leads.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Meta Ads</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Google Sheets</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Psychotest Platform - Aposis -->
+                <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-gray-200 dark:bg-gray-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-brain text-4xl text-gray-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 group-hover:text-primary dark:group-hover:text-primary-light transition-colors">Psychotest Platform - Aposis</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Led content evaluation and social performance analysis for student-focused edtech platform.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Meta Ads</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Notion</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Trello</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Programming Projects -->
+            <div id="programming-projects" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Hospital Inventory System -->
+                <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-gray-200 dark:bg-gray-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-box-open text-4xl text-gray-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 group-hover:text-primary dark:group-hover:text-primary-light transition-colors">Hospital Inventory Management</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Built a real-time inventory system to track and manage medical supplies across hospital units.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">CodeIgniter 4</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">MySQL</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hospital Website Revamp -->
+                <div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow">
+                    <div class="h-48 bg-gray-200 dark:bg-gray-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-hospital text-4xl text-gray-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 group-hover:text-primary dark:group-hover:text-primary-light transition-colors">Hospital Website Revamp</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Improved UX, simplified navigation, and ensured responsiveness for patients accessing info.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">HTML5</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">CSS</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">WordPress</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-12 sm:py-20 bg-gray-50 dark:bg-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">Skills & Tools</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <!-- Marketing Skills -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold mb-4">Digital Marketing</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Meta Ads</span>
+                                <span class="text-sm font-medium">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Google Ads</span>
+                                <span class="text-sm font-medium">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Canva</span>
+                                <span class="text-sm font-medium">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Programming Skills -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold mb-4">Development</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">CodeIgniter 4</span>
+                                <span class="text-sm font-medium">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">JavaScript</span>
+                                <span class="text-sm font-medium">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">MySQL</span>
+                                <span class="text-sm font-medium">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold mb-4">Tools</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">WordPress</span>
+                                <span class="text-sm font-medium">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Google Analytics</span>
+                                <span class="text-sm font-medium">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Trello</span>
+                                <span class="text-sm font-medium">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collaboration -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold mb-4">Soft Skills</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Problem Solving</span>
+                                <span class="text-sm font-medium">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Communication</span>
+                                <span class="text-sm font-medium">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Teamwork</span>
+                                <span class="text-sm font-medium">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-primary dark:bg-primary-light h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 sm:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">Get in Touch</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
+                <!-- Contact Form -->
+                <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-lg shadow-lg">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-primary dark:focus:ring-primary-light focus:border-primary dark:focus:border-primary-light dark:bg-gray-800">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-primary dark:focus:ring-primary-light focus:border-primary dark:focus:border-primary-light dark:bg-gray-800">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-primary dark:focus:ring-primary-light focus:border-primary dark:focus:border-primary-light dark:bg-gray-800"></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-primary hover:bg-primary-dark dark:bg-primary-light dark:hover:bg-primary text-white font-medium rounded-md transition duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex flex-col justify-center space-y-8">
+                    <div class="
